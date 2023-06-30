@@ -1,0 +1,66 @@
+<app-navbar></app-navbar>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+</style>
+</head>
+<body>
+
+<form 
+class="register-form"
+#f="ngForm"
+novalidate
+(ngSubmit)="f.form.valid&&onSubmit()"
+action="">
+  <div class="container">
+    <div class="text-center">
+    <h1 >Register</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+</div>
+    <label for="exampleInputEmail1" class="text-uppercase"><b>Name</b></label>
+    <input type="text" class="form-control" name="name" id="" [(ngModel)]="formdata.name" #name="ngModel" required>
+    <span class="text-danger" *ngIf="this.submit&&name.errors?.['required']">
+      Name is required
+    </span>
+    
+
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" id=""  [(ngModel)]="formdata.email" #email="ngModel" required>
+    <span class="text-danger" *ngIf="this.submit&&email.errors?.['required']">
+      Email is required
+    </span>
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" id="" [(ngModel)]="formdata.password" #password="ngModel" required minlength="8">
+    <span class="text-danger" *ngIf="this.submit&&password.errors?.['required']">
+      Password is required
+    </span>
+    <span class="text-danger" *ngIf="this.submit&&password.errors?.['minlength']">
+      minimum length of password 8 charactors
+    </span>
+    
+    <div>
+      <span class="text-danger" *ngIf="this.errorMessage">
+        <p [innerText]="this.errorMessage"></p>
+      </span>
+      <div class="text-danger" *ngIf="this.loading">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only"></span>
+        </div>
+      </div>
+    </div>
+    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+
+    <button type="submit" class="registerbtn" (click)="submit=true"[disabled]="this.loading">Register</button>
+  </div>
+  
+  <div class="container signin">
+    <p>Already have an account? <a href="javascript:void(0);" routerLink="/login">Login</a>.</p>
+  </div>
+</form>
+
+</body>
+</html>
